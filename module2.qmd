@@ -207,7 +207,7 @@ round(kappa(results[[MODELS[1]]], results[[MODELS[2]]]), 2)
 # Where does the first model go wrong? Rows = experts, columns = model.
 # Top-right cell: the model found a target the experts didn't (false positive).
 # Bottom-left cell: the model missed a target the experts found (false negative).
-table(experts = results$expert_target, model = results[[MODELS[1]]], useNA = "ifany")
+table(experts = results$expert_target, model = results[[MODELS[2]]], useNA = "ifany")
 ```
 
 **Discuss:** Did you beat the models? Do the models make the same kind
@@ -254,7 +254,7 @@ tightening it, or adding an example. Then see how many labels change.
 
 ```{r new-prompt}
 # ✏️ Edit this definition. Everything else in the prompt stays the same.
-MY_DEFINITION <- "A TARGET is any climate or energy goal the government commits to."
+MY_DEFINITION <- "A TARGET is any climate or energy goal the government commits to. For example, a government may commit to X% of emissions reductions by year yyyy. If you see a percentage AND a year, that is a good indication there is a TARGET."
 
 # Ask the first model again about every passage, using your definition (about 1 minute).
 new_labels <- sapply(passages$text, \(t) read_label(ask_model(MODELS[1], make_prompt(t, MY_DEFINITION))))
